@@ -1,0 +1,5 @@
+add_executable(repeater_main repeater_main.cpp)
+target_link_libraries(repeater_main PRIVATE repeater_lib)
+
+add_executable(benchmark_main benchmark_main.cpp)
+target_link_libraries(benchmark_main PRIVATE repeater_lib)
