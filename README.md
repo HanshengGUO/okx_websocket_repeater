@@ -97,7 +97,7 @@ repeater_main是repeater的程序入口，它会根据配置文件的内容订�
 ```
 此工具会连续运行15秒，并且打印出15秒内的延迟统计结果（见下文Results Section）
 ### 配置文件 repeater_config.json
-您可以按需要修改这个配置文件，来订阅订阅的Channel或调优性能。
+您可以按需要修改这个配置文件，来修改订阅的Channel或调优性能。
 ```
 {
   "debug": true,                       // 调试模式，true会输出日志
@@ -135,10 +135,10 @@ repeater_main是repeater的程序入口，它会根据配置文件的内容订�
 * 线程池的使用：创建一个与CPU核心数匹配的线程池，所有线程共享并执行同一个 `io_context`
 * 去重算法：采用“仅记录最大seqId”的策略。这是一个 O(1) 的整数比较操作，几乎无开销。
 * 最小化锁竞争
-  * 使用 std::mutex 保护共享的去重状态。
+  * 使用 `std::mutex` 保护共享的去重状态。
   * 锁的粒度被严格控制在最小范围：仅在读写 max_seq_id 或 unordered_set 的一个小范围内持有锁。
 * 零拷贝
-  * 传递 std::string_view，避免了重量级的字符串拷贝
+  * 传递 `std::string_view`，避免了重量级的字符串拷贝
   * 广播端: 使用`std::shared_ptr<const std::string>`传递数据。所有下游客户端会话共享同一份内存，而不是为每个连接复制一份数据。
 
 ## ⚠️注意
