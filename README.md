@@ -75,7 +75,7 @@ cd okx_websocket_repeater/build
 ### 3. 编译项目
 ```
 cmake ..
-make -j8
+make -j4
 ```
 ### 4. 运行项目
 #### repeater_main主项目
